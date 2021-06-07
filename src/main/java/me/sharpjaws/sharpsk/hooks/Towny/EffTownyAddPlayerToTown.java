@@ -4,9 +4,12 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+
 import me.sharpjaws.sharpsk.SharpSK;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
@@ -38,8 +41,8 @@ public class EffTownyAddPlayerToTown extends Effect {
 
         try {
             try {
-                TownyUniverse.getDataSource().getTown(s.getSingle(e))
-                        .addResident(TownyUniverse.getDataSource().getResident(p.getSingle(e).getName()));
+                TownyAPI.getInstance().getDataSource().getTown(s.getSingle(e))
+                .addResidentCheck(TownyUniverse.getInstance().getResident(p.getSingle(e).getName()));
 
             } catch (NotRegisteredException ex2) {
                 core.getLogger().warning("Could not add resident: " + "\"" + p.getSingle(e).getName() + "\""

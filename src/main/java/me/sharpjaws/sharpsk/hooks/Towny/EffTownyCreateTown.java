@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -48,24 +50,23 @@ public class EffTownyCreateTown extends Effect {
 
         try {
 
-            TownyWorld world = TownyUniverse.getDataSource().getWorld(homespawn.getSingle(e).getWorld().getName());
+            TownyWorld world = TownyAPI.getInstance().getDataSource().getWorld(homespawn.getSingle(e).getWorld().getName());
             Coord loc = Coord.parseCoord(homespawn.getSingle(e));
 
-            world.newTownBlock(loc);
-            TownyUniverse.getDataSource().newTown(s.getSingle(e));
-            Town town = TownyUniverse.getDataSource().getTown(s.getSingle(e));
+            TownyAPI.getInstance().getDataSource().newTown(s.getSingle(e));
+            Town town = TownyAPI.getInstance().getDataSource().getTown(s.getSingle(e));
             if (owner != null) {
-                Resident resident = TownyUniverse.getDataSource().getResident(owner.getSingle(e).getName());
-                town.addResident(resident);
+                Resident resident = TownyAPI.getInstance().getDataSource().getResident(owner.getSingle(e).getName());
+                town.addResidentCheck(resident);
                 town.setMayor(resident);
-                TownyUniverse.getDataSource().saveResident(resident);
+                TownyAPI.getInstance().getDataSource().saveResident(resident);
             }
             if (members != null) {
 
                 for (OfflinePlayer member : members.getAll(e)) {
-                    Resident loopresident = TownyUniverse.getDataSource().getResident(member.getName());
-                    town.addResident(loopresident);
-                    TownyUniverse.getDataSource().saveResident(loopresident);
+                    Resident loopresident = TownyAPI.getInstance().getDataSource().getResident(member.getName());
+                    town.addResidentCheck(loopresident);
+                    TownyAPI.getInstance().getDataSource().saveResident(loopresident);
                 }
 
             }
@@ -77,17 +78,17 @@ public class EffTownyCreateTown extends Effect {
             TB.setType(TB.getType());
             town.setSpawn(homespawn.getSingle(e));
             if (sb != null) {
-                town.setBalance(sb.getSingle(e).doubleValue(), "Town Creation");
+                town.getAccount().setBalance(sb.getSingle(e).doubleValue(), "Town Creation");
             } else {
-                town.setBalance(0, "Town Creation");
+                town.getAccount().setBalance(0, "Town Creation");
             }
 
-            TownyUniverse.getDataSource().saveTownBlock(TB);
-            TownyUniverse.getDataSource().saveTown(town);
-            TownyUniverse.getDataSource().saveWorld(world);
+            TownyAPI.getInstance().getDataSource().saveTownBlock(TB);
+            TownyAPI.getInstance().getDataSource().saveTown(town);
+            TownyAPI.getInstance().getDataSource().saveWorld(world);
 
-            TownyUniverse.getDataSource().saveTownList();
-            TownyUniverse.getDataSource().saveTownBlockList();
+            TownyAPI.getInstance().getDataSource().saveTowns();
+            TownyAPI.getInstance().getDataSource().saveTownBlocks();
 
         } catch (AlreadyRegisteredException ex2) {
             core.getLogger()

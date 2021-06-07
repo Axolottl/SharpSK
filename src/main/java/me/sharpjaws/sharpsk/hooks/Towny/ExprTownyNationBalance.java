@@ -6,9 +6,10 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
@@ -39,7 +40,7 @@ public class ExprTownyNationBalance extends SimpleExpression<Number> {
     @Nullable
     protected Number[] get(Event e) {
         try {
-            return new Number[]{TownyUniverse.getDataSource().getNation(nation.getSingle(e)).getHoldingBalance()};
+            return new Number[]{TownyAPI.getInstance().getDataSource().getNation(nation.getSingle(e)).getAccount().getHoldingBalance()};
         } catch (NotRegisteredException | EconomyException e1) {
             return new Number[]{0};
         }
@@ -54,7 +55,7 @@ public class ExprTownyNationBalance extends SimpleExpression<Number> {
     public void change(Event e, Object[] delta, Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             try {
-                TownyUniverse.getDataSource().getNation(nation.getSingle(e))
+                TownyAPI.getInstance().getDataSource().getNation(nation.getSingle(e)).getAccount()
                         .setBalance(((Number) delta[0]).doubleValue(), null);
 
             } catch (NullPointerException | EconomyException | NotRegisteredException ex) {

@@ -6,6 +6,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
@@ -54,7 +56,7 @@ public class ExprTownyTownBalance extends SimpleExpression<Number> {
     public void change(Event e, Object[] delta, Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             try {
-                TownyUniverse.getDataSource().getTown(town.getSingle(e)).setBalance(((Number) delta[0]).doubleValue(),
+                TownyAPI.getInstance().getDataSource().getTown(town.getSingle(e)).getAccount().setBalance(((Number) delta[0]).doubleValue(),
                         "Server");
 
             } catch (NullPointerException | EconomyException | NotRegisteredException ex) {

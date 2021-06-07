@@ -145,12 +145,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.palmergames</groupId>
-            <artifactId>Towny</artifactId>
-            <version>0.91.1.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>me.lucko.luckperms</groupId>
             <artifactId>luckperms-api</artifactId>
             <version>3.2</version>
@@ -201,6 +195,12 @@
             <artifactId>fawe-api</artifactId>
             <version>latest</version>
         </dependency>
+
+	<dependency>
+	    <groupId>com.github.TownyAdvanced</groupId>
+	    <artifactId>Towny</artifactId>
+	    <version>0.96.7.0</version>
+	</dependency>
 
         <dependency>
             <groupId>com.sk89q</groupId>

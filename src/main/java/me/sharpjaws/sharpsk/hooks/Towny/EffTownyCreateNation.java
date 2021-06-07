@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
@@ -44,19 +46,19 @@ public class EffTownyCreateNation extends Effect {
 
         try {
 
-            TownyUniverse.getDataSource().newNation(nat.getSingle(e));
-            Nation nation = TownyUniverse.getDataSource().getNation(nat.getSingle(e));
-            Town town = TownyUniverse.getDataSource().getTown(tow.getSingle(e));
+            TownyAPI.getInstance().getDataSource().newNation(nat.getSingle(e));
+            Nation nation = TownyAPI.getInstance().getDataSource().getNation(nat.getSingle(e));
+            Town town = TownyAPI.getInstance().getDataSource().getTown(tow.getSingle(e));
             nation.addTown(town);
             nation.setCapital(town);
             if (bal != null) {
-                nation.setBalance(bal.getSingle(e).doubleValue(), "Nation Creation");
+                nation.getAccount().setBalance(bal.getSingle(e).doubleValue(), "Nation Creation");
             } else {
-                nation.setBalance(0, "Nation Creation");
+                nation.getAccount().setBalance(0, "Nation Creation");
             }
-            TownyUniverse.getDataSource().saveTown(town);
-            TownyUniverse.getDataSource().saveNation(nation);
-            TownyUniverse.getDataSource().saveNationList();
+            TownyAPI.getInstance().getDataSource().saveTown(town);
+            TownyAPI.getInstance().getDataSource().saveNation(nation);
+            TownyAPI.getInstance().getDataSource().saveNations();
 
         } catch (NotRegisteredException | EconomyException ex1) {
             core.getLogger().warning("Could not register nation: " + "\"" + nat.getSingle(e) + "\"");
