@@ -188,8 +188,8 @@ public class TownyRegistry {
                 "[sharpsk] [towny] [bank] balance of town %string%");
         Skript.registerExpression(ExprTownyTownOfPlayer.class, String.class, ExpressionType.SIMPLE,
                 "[sharpsk] [towny] town of %offlineplayer%");
-        Skript.registerExpression(ExprTownyTownUIDOfPlayer.class, String.class, ExpressionType.SIMPLE,
-                "[sharpsk] [towny] town UID of %offlineplayer%");
+        Skript.registerExpression(ExprTownyTownUUIDOfPlayer.class, String.class, ExpressionType.SIMPLE,
+                "[sharpsk] [towny] town UUID of %offlineplayer%");
         Skript.registerExpression(ExprTownyNationOfPlayer.class, String.class, ExpressionType.SIMPLE,
                 "[sharpsk] [towny] nation of %offlineplayer%");
         Skript.registerExpression(ExprTownyTownBlocktypeAtLocation.class, TownBlockType.class, ExpressionType.SIMPLE,

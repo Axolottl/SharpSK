@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-public class ExprTownyTownUIDOfPlayer extends SimpleExpression<String> {
+public class ExprTownyTownUUIDOfPlayer extends SimpleExpression<String> {
 
     private Expression<OfflinePlayer> inputSkriptResident;
 
@@ -33,7 +33,7 @@ public class ExprTownyTownUIDOfPlayer extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event e, boolean paramBoolean) {
-        return "[sharpsk] [towny] town UID of %player%";
+        return "[sharpsk] [towny] town UUID of %player%";
     }
 
     @Override
