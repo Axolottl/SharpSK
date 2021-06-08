@@ -44,8 +44,13 @@ public class ExprTownyTownUUIDAtLocation extends SimpleExpression<String> {
     @Override
     @Nullable
     protected String[] get(Event e) {
+        try {
             Town town = TownyAPI.getInstance().getTown(location.getSingle(e));
             return new String[]{String.valueOf(town.getUUID())};
+            }
+        catch(NullPointerException ex) {
+            return new String[]{};
+        }
     }
 
     @Override
