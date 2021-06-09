@@ -12,6 +12,8 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
+import me.sharpjaws.sharpsk.conditions.CondTimerActive;
+
 import com.palmergames.bukkit.towny.event.*;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import org.bukkit.OfflinePlayer;
@@ -218,6 +220,9 @@ public class TownyRegistry {
                 "[sharpsk] [towny] kick %offlineplayer% from nation %string%");
         Skript.registerEffect(EffTownyAddPlayerToNation.class, "[towny] add %offlineplayer% to nation %string%");
 
+        // Towny Conditions:
+        Skript.registerCondition(ConTownyTownUUIDExists.class, "[sharpsk] [towny] town %string% exists");
+        
     }
 
 }

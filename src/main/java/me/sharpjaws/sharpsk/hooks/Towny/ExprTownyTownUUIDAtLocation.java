@@ -48,9 +48,9 @@ public class ExprTownyTownUUIDAtLocation extends SimpleExpression<String> {
             Town town = TownyAPI.getInstance().getTown(location.getSingle(e));
             return new String[]{String.valueOf(town.getUUID())};
             }
-        catch(NullPointerException ex) {
-            return new String[]{};
+        catch(NullPointerException Ignored) {
         }
+        return new String[]{};
     }
 
     @Override

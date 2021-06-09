@@ -42,10 +42,9 @@ public class ExprTownyTownUUIDOfPlayer extends SimpleExpression<String> {
         try {
             Resident resident = TownyUniverse.getInstance().getResident(inputSkriptResident.getSingle(e).getName());
             return new String[]{String.valueOf(resident.getTown().getUUID())};
-        } catch (NotRegisteredException ex) {
-            ex.printStackTrace();
+        } catch (NotRegisteredException Ignored) {
+            return new String[]{};
         }
-        return new String[]{};
 
     }
 
