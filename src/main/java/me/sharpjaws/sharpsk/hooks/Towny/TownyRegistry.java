@@ -221,7 +221,8 @@ public class TownyRegistry {
         Skript.registerEffect(EffTownyAddPlayerToNation.class, "[towny] add %offlineplayer% to nation %string%");
 
         // Towny Conditions:
-        Skript.registerCondition(ConTownyTownUUIDExists.class, "[sharpsk] [towny] town %string% exists");
+        Skript.registerCondition(ConTownyTownUUIDExists.class, "[sharpsk] [towny] town %string% [does] exist[s]");
+        Skript.registerCondition(ConTownyTownUUIDNotExists.class, "[sharpsk] [towny] town %string% [does] not exist[s]");
         
     }
 

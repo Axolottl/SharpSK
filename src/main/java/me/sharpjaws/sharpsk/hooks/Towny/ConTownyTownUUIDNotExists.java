@@ -12,7 +12,7 @@ import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-public class ConTownyTownUUIDExists extends Condition {
+public class ConTownyTownUUIDNotExists extends Condition {
 
     private Expression<String> UUID;
 
@@ -26,7 +26,7 @@ public class ConTownyTownUUIDExists extends Condition {
 
     @Override
     public String toString(@Nullable Event e, boolean paramBoolean) {
-        return "[sharpsk] [towny] town %string% [does] exist[s]";
+        return "[sharpsk] [towny] town %string% [does] not exist[s]";
     }
 
     @Override
@@ -35,10 +35,10 @@ public class ConTownyTownUUIDExists extends Condition {
     	
         try {
         	TownyAPI.getInstance().getDataSource().getTown((java.util.UUID.fromString(UUID.getSingle(e))));
-            return true;
+            return false;
         } catch (NullPointerException | IllegalArgumentException | NotRegisteredException ignored) {
         	//ignored.printStackTrace();
-            return false;
+            return true;
         }
     }
 }

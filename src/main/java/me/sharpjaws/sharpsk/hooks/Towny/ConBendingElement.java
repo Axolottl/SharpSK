@@ -8,25 +8,29 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-public class ConTownyTownUUIDExists extends Condition {
-
-    private Expression<String> UUID;
+public class ConBendingElement extends Condition {
+	
+    private Expression<String> s;
+    private Expression<OfflinePlayer> p;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean,
                         SkriptParser.ParseResult Result) {
-    	UUID = (Expression<String>) expr[0];
+        p = (Expression<OfflinePlayer>) expr[0];
+        s = (Expression<String>) expr[1];
+        
         return true;
     }
 
     @Override
     public String toString(@Nullable Event e, boolean paramBoolean) {
-        return "[sharpsk] [towny] town %string% [does] exist[s]";
+        return "[sharpsk] [bending] element of %offlineplayer% is %string%";
     }
 
     @Override
